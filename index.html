@@ -5,21 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>선교 DNA 테스트</title>
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif, sans-serif; background:#f5f5f5; margin:0; padding:0;}
+    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background:#f5f5f5; margin:0; padding:0;}
     .container { max-width:700px; margin:30px auto; background:#fff; padding:30px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1);}
-    h1 { text-align:center; margin-bottom:30px; }
+    h1 { text-align:center; margin-bottom:5px; }
+    .subtitle { text-align:center; font-size:14px; color:#555; margin-bottom:30px; }
     .question { margin-bottom:25px; }
-    .question strong { display:block; margin-bottom:10px; }
-    .options label { display:block; margin:5px 0; cursor:pointer; }
+    .question strong { display:block; margin-bottom:10px; font-size:18px; }
+    .options label { display:block; margin:5px 0; cursor:pointer; font-size:16px; }
     .options input { margin-right:8px; }
-    #submitBtn { display:block; margin:20px auto; padding:10px 20px; font-size:16px; border:none; border-radius:5px; background:#4CAF50; color:#fff; cursor:pointer; }
+    #submitBtn { display:block; margin:20px auto; padding:12px 24px; font-size:18px; border:none; border-radius:5px; background:#4CAF50; color:#fff; cursor:pointer; }
     #submitBtn:hover { background:#45a049; }
-    .result { text-align:center; margin-top:30px; font-size:18px; line-height:1.5; }
+    #resultPage { display:none; text-align:center; }
+    #resultPage h2 { margin-bottom:20px; font-size:28px; }
+    #resultPage p { line-height:1.7; font-size:18px; }
+    .footer { font-size: 12px; color: #888888; margin-top:20px; text-align:right; }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container" id="quizPage">
     <h1>💥 당신은 어떤 선교 DNA인가?</h1>
+    <div class="subtitle">당신이 선교팀이라면? 선교 유형 검사지<br>총 8문제 | 예상 소요시간 : 2분</div>
     <form id="quizForm">
       <div class="question">
         <strong>Q1. 선교하면 제일 먼저 떠오르는 건?</strong>
@@ -95,12 +100,25 @@
       </div>
       <button type="button" id="submitBtn">결과 보기</button>
     </form>
+  </div>
 
-    <div id="result" class="result"></div>
+  <div class="container" id="resultPage">
+    <h1>💥 당신의 선교 DNA 결과</h1>
+    <div id="result"></div>
   </div>
 
   <script>
-    // 유형 설명
+    const QUESTION_MAP = {
+      q1: {A:'해외선교형', B:'통일선교형', C:'군선교형', D:'국내선교형'},
+      q2: {A:'군선교형', B:'국내선교형', C:'해외선교형', D:'통일선교형'},
+      q3: {A:'군선교형', B:'국내선교형', C:'해외선교형', D:'통일선교형'},
+      q4: {A:'통일선교형', B:'국내선교형', C:'군선교형', D:'해외선교형'},
+      q5: {A:'군선교형', B:'국내선교형', C:'통일선교형', D:'해외선교형'},
+      q6: {A:'군선교형', B:'통일선교형', C:'해외선교형', D:'국내선교형'},
+      q7: {A:'군선교형', B:'국내선교형', C:'군선교형', D:'해외선교형'},
+      q8: {A:'해외선교형', B:'군선교형', C:'해외선교형', D:'통일선교형'}
+    };
+
     const TYPE_DESC = {
       '해외선교형':`새로운 문화와 사람 속에서도 복음을 전하는 모험가형입니다.  
 외국에서 사람들과 즉시 친해지고, 새로운 환경에 도전하는 걸 즐기며,  
@@ -118,54 +136,45 @@
 
     const TYPE_EMOJI = { '해외선교형':'🌏', '통일선교형':'🤝', '군선교형':'🪖', '국내선교형':'🏡' };
 
-    // 문항별 선택지 → 실제 유형 매핑
-    const QUESTION_MAP = {
-      q1: {A:'해외선교형', B:'통일선교형', C:'군선교형', D:'국내선교형'},
-      q2: {A:'군선교형', B:'국내선교형', C:'해외선교형', D:'통일선교형'},
-      q3: {A:'군선교형', B:'국내선교형', C:'해외선교형', D:'통일선교형'},
-      q4: {A:'통일선교형', B:'국내선교형', C:'군선교형', D:'해외선교형'},
-      q5: {A:'군선교형', B:'국내선교형', C:'통일선교형', D:'해외선교형'},
-      q6: {A:'군선교형', B:'통일선교형', C:'해외선교형', D:'국내선교형'},
-      q7: {A:'군선교형', B:'해외선교형', C:'통일선교형', D:'국내선교형'}, // 수정
-      q8: {A:'해외선교형', B:'군선교형', C:'통일선교형', D:'국내선교형'}  // 수정
-    };
-
     document.getElementById('submitBtn').addEventListener('click', ()=>{
       const form = document.getElementById('quizForm');
-      const formData = new FormData(form);
+      let counts = {'해외선교형':0, '국내선교형':0, '군선교형':0, '통일선교형':0};
 
-      // 유형별 점수 초기화
-      const counts = {'해외선교형':0,'통일선교형':0,'군선교형':0,'국내선교형':0};
-
-      // 문항별 점수 계산
       for(let i=1;i<=8;i++){
-        const val = formData.get('q'+i);
-        if(val) counts[QUESTION_MAP['q'+i][val]]++;
+        let ans = form['q'+i].value;
+        if(!ans){ alert('모든 문항에 답해주세요!'); return; }
+        counts[QUESTION_MAP['q'+i][ans]]++;
       }
 
-      // 최대 유형 찾기
       let maxType = '해외선교형';
-      for(let t in counts){ if(counts[t] > counts[maxType]) maxType = t; }
-
-      const desc = TYPE_DESC[maxType];
-      const emoji = TYPE_EMOJI[maxType];
-      const percent = ((counts[maxType]/8)*100).toFixed(1);
-
-      // 기타 유형 퍼센티지
-      let otherStr = '';
-      for(let t in counts){
-        if(t!==maxType){
-          otherStr += `${t} (${((counts[t]/8)*100).toFixed(1)}%)<br>`;
-        }
+      for(const t in counts){
+        if(counts[t] > counts[maxType]) maxType = t;
       }
 
-      // 결과 출력
-      form.style.display = 'none';
+      const total = Object.values(counts).reduce((a,b)=>a+b,0);
+      let percents = {};
+      for(const t in counts){
+        percents[t] = ((counts[t]/total)*100).toFixed(1);
+      }
+
+      let othersSorted = Object.keys(counts)
+        .filter(t=>t!==maxType)
+        .sort((a,b)=>percents[b]-percents[a]);
+
+      let otherTypesHTML = '';
+      othersSorted.forEach(t=>{
+        otherTypesHTML += `${t} (${percents[t]}%)<br>`;
+      });
+
       document.getElementById('result').innerHTML = `
-        <h2>${emoji} ${maxType} (${percent}%)</h2>
-        <p>${desc}</p>
-        <p style="font-size:14px; margin-top:20px;">기타:<br>${otherStr}</p>
+        <h2>${TYPE_EMOJI[maxType]} ${maxType} (${percents[maxType]}%)</h2>
+        <p>${TYPE_DESC[maxType]}</p>
+        <hr>
+        <p style="font-size:16px; color:#555;">기타:<br>${otherTypesHTML}</p>
       `;
+
+      document.getElementById('quizPage').style.display = 'none';
+      document.getElementById('resultPage').style.display = 'block';
     });
   </script>
 </body>
