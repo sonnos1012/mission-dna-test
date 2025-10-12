@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>선교 DNA 테스트</title>
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background:#f5f5f5; margin:0; padding:0;}
+    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif, sans-serif; background:#f5f5f5; margin:0; padding:0;}
     .container { max-width:700px; margin:30px auto; background:#fff; padding:30px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1);}
     h1 { text-align:center; margin-bottom:30px; }
     .question { margin-bottom:25px; }
@@ -100,8 +100,7 @@
   </div>
 
   <script>
-    const TYPE_MAP = { A:'해외선교형', B:'통일선교형', C:'군선교형', D:'국내선교형' };
-    const TYPE_EMOJI = { '해외선교형':'🌏', '통일선교형':'🤝', '군선교형':'🪖', '국내선교형':'🏡' };
+    // 유형 설명
     const TYPE_DESC = {
       '해외선교형':`새로운 문화와 사람 속에서도 복음을 전하는 모험가형입니다.  
 외국에서 사람들과 즉시 친해지고, 새로운 환경에 도전하는 걸 즐기며,  
@@ -117,35 +116,53 @@
 통일과 평화를 위해 전략적 사고와 기도 중심의 사역을 실천하는 유형입니다. 🙏`
     };
 
+    const TYPE_EMOJI = { '해외선교형':'🌏', '통일선교형':'🤝', '군선교형':'🪖', '국내선교형':'🏡' };
+
+    // 문항별 선택지 → 실제 유형 매핑
+    const QUESTION_MAP = {
+      q1: {A:'해외선교형', B:'통일선교형', C:'군선교형', D:'국내선교형'},
+      q2: {A:'군선교형', B:'국내선교형', C:'해외선교형', D:'통일선교형'},
+      q3: {A:'군선교형', B:'국내선교형', C:'해외선교형', D:'통일선교형'},
+      q4: {A:'통일선교형', B:'국내선교형', C:'군선교형', D:'해외선교형'},
+      q5: {A:'군선교형', B:'국내선교형', C:'통일선교형', D:'해외선교형'},
+      q6: {A:'군선교형', B:'통일선교형', C:'해외선교형', D:'국내선교형'},
+      q7: {A:'군선교형', B:'해외선교형', C:'군선교형', D:'국내선교형'},
+      q8: {A:'해외선교형', B:'군선교형', C:'군선교형', D:'통일선교형'}
+    };
+
     document.getElementById('submitBtn').addEventListener('click', ()=>{
       const form = document.getElementById('quizForm');
       const formData = new FormData(form);
-      const counts = {A:0,B:0,C:0,D:0};
+
+      // 유형별 점수 초기화
+      const counts = {'해외선교형':0,'통일선교형':0,'군선교형':0,'국내선교형':0};
+
+      // 문항별 점수 계산
       for(let i=1;i<=8;i++){
         const val = formData.get('q'+i);
-        if(val) counts[val]++;
+        if(val) counts[QUESTION_MAP['q'+i][val]]++;
       }
 
       // 최대 유형 찾기
-      let maxType = 'A';
+      let maxType = '해외선교형';
       for(let t in counts){ if(counts[t] > counts[maxType]) maxType = t; }
 
-      const typeName = TYPE_MAP[maxType];
-      const emoji = TYPE_EMOJI[typeName];
-      const desc = TYPE_DESC[typeName];
+      const desc = TYPE_DESC[maxType];
+      const emoji = TYPE_EMOJI[maxType];
       const percent = ((counts[maxType]/8)*100).toFixed(1);
 
       // 기타 유형 퍼센티지
       let otherStr = '';
       for(let t in counts){
         if(t!==maxType){
-          otherStr += `${TYPE_MAP[t]} (${((counts[t]/8)*100).toFixed(1)}%)<br>`;
+          otherStr += `${t} (${((counts[t]/8)*100).toFixed(1)}%)<br>`;
         }
       }
 
+      // 결과 출력
       form.style.display = 'none';
       document.getElementById('result').innerHTML = `
-        <h2>${emoji} ${typeName} (${percent}%)</h2>
+        <h2>${emoji} ${maxType} (${percent}%)</h2>
         <p>${desc}</p>
         <p style="font-size:14px; margin-top:20px;">기타:<br>${otherStr}</p>
       `;
