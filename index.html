@@ -1,0 +1,296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!doctype html&gt;</p>
+<p class="p1">&lt;html lang="ko"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1">&lt;meta charset="utf-8" /&gt;</p>
+<p class="p1">&lt;meta name="viewport" content="width=device-width,initial-scale=1" /&gt;</p>
+<p class="p1">&lt;title&gt;선교 DNA 검사 — MBTI 스타일&lt;/title&gt;</p>
+<p class="p1">&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>:root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR","Helvetica Neue","Apple SD Gothic Neo",sans-serif;color:#111}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>body{margin:0;background:#f7f7fb;display:flex;align-items:flex-start;justify-content:center;padding:32px 12px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.container{width:100%;max-width:900px;background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(16,24,40,0.08);padding:28px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>h1{margin:0 0 10px;font-size:20px}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>p.lead{margin:0 0 18px;color:#555}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.quiz{display:grid;gap:14px}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.q{background:#fcfcff;border:1px solid #eef0f6;padding:14px;border-radius:10px}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.q h3{margin:0 0 8px;font-size:15px}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.choices{display:flex;gap:8px;flex-wrap:wrap}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.choice{flex:1 1 48%;min-width:140px;background:#fff;border:1px solid #e6e8f0;padding:8px 10px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:8px}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.choice input{display:none}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.choice.selected{background:#eef6ff;border-color:#bcd8ff}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.actions{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>button{background:#0b63ff;color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:600}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>button.secondary{background:#f1f3f8;color:#1a2333}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.result{margin-top:18px;padding:16px;border-radius:10px;background:linear-gradient(180deg,#fff 0%, #fbfdff 100%);border:1px solid #e8eefc}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.result h2{margin:0 0 8px}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.result p{margin:6px 0;color:#333}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.meta{color:#666;font-size:13px;margin-top:6px}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.share-row{display:flex;gap:8px;margin-top:10px}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>@media (max-width:520px){ .choices{flex-direction:column} .choice{flex:1 1 auto} }</p>
+<p class="p1">&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="container" role="main"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;💥 당신은 어떤 선교 DNA인가? — 검사지&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p class="lead"&gt;답안을 입력하고 제출하면 MBTI 스타일 결과를 한 가지 유형으로 알려줘요. (형식: 이름: ABCC...)&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="inputArea"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;label style="display:block;margin-bottom:8px;font-weight:600"&gt;이름 입력 (예: 철수)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input id="nameInput" type="text" placeholder="이름을 입력하세요" style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6eaf2;margin-bottom:12px" /&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;label style="display:block;margin-bottom:8px;font-weight:600"&gt;답안 직접 입력 (예: ABDCCDAA)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input id="answersInput" type="text" placeholder="예: ABDCCDAA 또는 직접 클릭으로 풀기" style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6eaf2" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="meta" style="margin-top:8px"&gt;또는 아래 질문을 클릭해서 풀고 &lt;strong&gt;제출&lt;/strong&gt;하세요.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;form id="quizForm" class="quiz" onsubmit="return false;" aria-label="선교 DNA 문항"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;!-- Q1 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="q" data-q="1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Q1. 선교하면 제일 먼저 떠오르는 건?&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="choices"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q1" value="A"&gt;🅐 비행기 타고 새로운 곳으로 가는 설렘 ✈️&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q1" value="B"&gt;🅑 한민족이 하나 되는 그림 🇰🇷&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q1" value="C"&gt;🅒 전투복 입고 믿음으로 버티는 형제들 💪&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q1" value="D"&gt;🅓 우리 학교, 우리 교회에서 복음 전하기 🏡&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;!-- Q2 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="q" data-q="2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Q2. 하나님이 나를 어디에 부르신 것 같아?&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="choices"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q2" value="C"&gt;🅐 군대나 훈련소 같은 곳에서도 복음 전하라고&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q2" value="B"&gt;🅑 내 주변, 내 일상 속에서 사랑을 전하라고&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q2" value="A"&gt;🅒 아직 복음을 모르는 나라로 보내시려고&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q2" value="D"&gt;🅓 분단된 민족을 위해 기도하라고&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;!-- Q3 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="q" data-q="3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Q3. 선교하면 떠오르는 장면은?&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="choices"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q3" value="C"&gt;🅐 PX, 전투복, 철모, 새벽기도&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q3" value="B"&gt;🅑 거리에서 찬양하고 전도하는 청년들&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q3" value="A"&gt;🅒 다른 언어로 찬양하는 사람들&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q3" value="D"&gt;🅓 나라 지도 펴놓고 손 얹고 기도하는 사람들&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;!-- Q4 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="q" data-q="4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Q4. 사역 중 가장 힘이 되는 순간은?&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="choices"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q4" value="D"&gt;🅐 기도하면서 나라 전체의 변화를 느낄 때&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q4" value="B"&gt;🅑 가까운 사람 변화되는 거 볼 때&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q4" value="C"&gt;🅒 다들 지쳐있을 때 믿음으로 버텨주는 순간&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q4" value="A"&gt;🅓 다른 문화 속에서도 예수 이름 함께 외칠 때&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;!-- Q5 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="q" data-q="5"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Q5. 선교할 때 제일 중요하다고 생각하는 건?&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="choices"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q5" value="C"&gt;🅐 인내와 훈련&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q5" value="B"&gt;🅑 사랑과 섬김&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q5" value="D"&gt;🅒 비전과 기도&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q5" value="A"&gt;🅓 도전과 순종&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;!-- Q6 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="q" data-q="6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Q6. 만약 “이번 여름 단기선교 갈래?” 하면?&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="choices"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q6" value="C"&gt;🅐 군인사역 캠프면 바로 OK&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q6" value="D"&gt;🅑 북한 관련 사역이라면 진지하게 기도 후 결정&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q6" value="A"&gt;🅒 해외라면 이미 짐 싸고 있음&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q6" value="B"&gt;🅓 국내 봉사나 캠퍼스 선교부터 해보고 싶다&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;!-- Q7 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="q" data-q="7"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Q7. 팀 안에서 내가 제일 잘할 수 있는 건?&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="choices"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q7" value="A"&gt;🅐 말씀 묵상 나누고 기도 모임 리드하기&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q7" value="B"&gt;🅑 사람들과 금방 친해지고 현지 적응력&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q7" value="C"&gt;🅒 꼼꼼한 기록, 뒤에서 든든히 지원&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q7" value="D"&gt;🅓 분위기 살리고 몸으로 뛰기&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;!-- Q8 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="q" data-q="8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Q8. 한 문장으로 나를 표현하자면?&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="choices"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q8" value="A"&gt;🅐 “여기서부터가 선교야.”&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q8" value="C"&gt;🅑 “끝까지 버티면 하나님이 일하신다.”&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q8" value="A"&gt;🅒 “가자! 주님이 가라 하셨으니까!”&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="choice"&gt;&lt;input type="radio" name="q8" value="B"&gt;🅓 “하나님은 나라를 통해 일하신다.”&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="actions"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button id="submitBtn" type="button"&gt;제출해서 결과보기&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button id="fillFromText" class="secondary" type="button"&gt;텍스트 답안으로 채우기&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button id="resetBtn" class="secondary" type="button"&gt;초기화&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/form&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="resultArea" aria-live="polite"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">/* 선택한 카드 스타일 적용 */</p>
+<p class="p1">document.querySelectorAll('.choice').forEach(label=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">  </span>label.addEventListener('click', e=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const group = label.closest('.choices');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// unselect siblings for that question</p>
+<p class="p1"><span class="Apple-converted-space">    </span>group.querySelectorAll('.choice').forEach(l=&gt;l.classList.remove('selected'));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>label.classList.add('selected');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const input = label.querySelector('input');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>input.checked = true;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1">});</p>
+<p class="p2"><br></p>
+<p class="p1">/* 질문-선택 매핑 로직: A-&gt;해외, B-&gt;통일, C-&gt;군, D-&gt;국내 */</p>
+<p class="p1">const TYPE_MAP = { A: '해외선교형', B: '통일선교형', C: '군선교형', D: '국내선교형' };</p>
+<p class="p1">const TYPE_EMOJI = { '해외선교형':'🌏', '통일선교형':'🤝', '군선교형':'🪖', '국내선교형':'🏡' };</p>
+<p class="p1">const TYPE_DESC = {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>'해외선교형': '짐 싸라, 네 마음은 이미 비행기 탔다 ✈️ 새로운 문화와 사람 속에서도 복음을 전하는 모험가형입니다. 낯선 환경에서도 빠르게 적응하며 도전과 순종으로 선교 현장에서 활약합니다.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>'국내선교형': '멀리 안 가도 돼, 바로 옆이 선교지야 🏡 꾸준함과 섬김으로 일상에서 복음을 전하는 따뜻한 실천가형입니다.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>'군선교형': '영적 전쟁터의 믿음의 전사 💪 인내와 훈련으로 공동체를 세우고, 어려움 속에서도 든든히 버티는 사역자형입니다.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>'통일선교형': '하나 된 민족을 위해 무릎 꿇는 중보자 🙏 기도와 비전으로 세대를 잇고 민족을 위해 기도하는 중보형입니다.'</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">function readFormAnswers() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const answers = [];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for (let i=1;i&lt;=8;i++){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const r = document.querySelector(`input[name="q${i}"]:checked`);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>answers.push(r ? r.value : '');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return answers;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function fillFromTextToForm(text) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// text like "ABDCCDAA" or with spaces</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const cleaned = (text||'').toUpperCase().replace(/[^ABCD]/g,'');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for (let i=0;i&lt;8;i++){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const ch = cleaned[i] || '';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (!ch) continue;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const input = document.querySelector(`input[name="q${i+1}"][value="${ch}"]`);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (input){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>input.checked = true;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>// set selected style</p>
+<p class="p1"><span class="Apple-converted-space">      </span>input.closest('.choices').querySelectorAll('.choice').forEach(l=&gt;l.classList.remove('selected'));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>input.closest('label, .choice').classList.add('selected');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* 버튼 이벤트 */</p>
+<p class="p1">document.getElementById('fillFromText').addEventListener('click',()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const txt = document.getElementById('answersInput').value;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (!txt){ alert('먼저 텍스트 답안을 입력하세요. 예: ABDCCDAA'); return; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>fillFromTextToForm(txt);</p>
+<p class="p1">});</p>
+<p class="p2"><br></p>
+<p class="p1">document.getElementById('resetBtn').addEventListener('click',()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('quizForm').reset();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.querySelectorAll('.choice').forEach(l=&gt;l.classList.remove('selected'));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('resultArea').innerHTML='';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('answersInput').value='';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('nameInput').value='';</p>
+<p class="p1">});</p>
+<p class="p2"><br></p>
+<p class="p1">document.getElementById('submitBtn').addEventListener('click',()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// prefer explicit form answers; if empty, try text input</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const name = (document.getElementById('nameInput').value || '응답자').trim();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>let answers = readFormAnswers();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const emptyCount = answers.filter(a=&gt;!a).length;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (emptyCount === 8) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// nothing selected =&gt; try answersInput</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const raw = (document.getElementById('answersInput').value || '').toUpperCase().replace(/[^ABCD]/g,'');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (raw.length === 0){ alert('답안을 선택하거나 텍스트 답안을 입력해줘. 예: 철수 : ABDCCDAA'); return; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// take first 8 (or pad)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>answers = raw.slice(0,8).split('').concat(Array(8 - Math.min(8,raw.length)).fill(''));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// if some selected and some not, fill missing from answersInput if provided</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const raw = (document.getElementById('answersInput').value || '').toUpperCase().replace(/[^ABCD]/g,'');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (raw.length&gt;0){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>for (let i=0;i&lt;8;i++){</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (!answers[i] &amp;&amp; raw[i]) answers[i] = raw[i];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// final validation: require at least 1 answer</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (answers.filter(a=&gt;a).length === 0){ alert('답안을 하나 이상 채워줘.'); return; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// scoring</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const counts = { A:0,B:0,C:0,D:0 };</p>
+<p class="p1"><span class="Apple-converted-space">  </span>answers.forEach(ch=&gt;{ if (ch &amp;&amp; counts.hasOwnProperty(ch)) counts[ch] += 1; });</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// compute percent by count/answeredCount or by 8? We'll compute by total answered (so partial allowed).</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const totalAnswered = Math.max(1, answers.filter(a=&gt;a).length);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const percents = {};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for (const k of Object.keys(counts)){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>percents[k] = (counts[k] / totalAnswered) * 100;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// choose top: if tie, choose the one with largest raw count, else alphabetical fallback</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const sorted = Object.keys(counts).sort((x,y)=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (counts[y] !== counts[x]) return counts[y]-counts[x];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return percents[y]-percents[x];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const topKey = sorted[0];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const topType = TYPE_MAP[topKey];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const topPct = (percents[topKey]).toFixed(1);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// build answer string like user wanted: "이름 : ABDCCDAA" -&gt; show as meta</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const answerStr = answers.map(x=&gt;x||'-').join('');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// render result</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const resultArea = document.getElementById('resultArea');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>resultArea.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="result" role="region" aria-label="검사 결과"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2&gt;[${escapeHtml(name)}]님의 선교 DNA 검사 결과:&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="font-size:18px;margin:6px 0"&gt;${TYPE_EMOJI[topType] || ''} &lt;strong&gt;${topType}(${topPct}%)&lt;/strong&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;${escapeHtml(TYPE_DESC[topType] || '')}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="meta"&gt;응답: &lt;code&gt;${escapeHtml(answerStr)}&lt;/code&gt; (총 응답 ${totalAnswered}문항)&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="share-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button id="copyBtn" type="button"&gt;결과 텍스트 복사&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button id="printBtn" type="button" class="secondary"&gt;인쇄 / PDF 저장&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// attach copy &amp; print</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('copyBtn').addEventListener('click',()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const text = `[${name}]님의 선교 DNA 검사 결과:\\n${TYPE_EMOJI[topType]} ${topType}(${topPct}%)\\n\\n${TYPE_DESC[topType]}\\n응답: ${answerStr}`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>navigator.clipboard?.writeText(text).then(()=&gt; alert('결과 복사됨!')).catch(()=&gt; alert('복사 실패 — 직접 드래그하여 복사해줘.'));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('printBtn').addEventListener('click',()=&gt; window.print());</p>
+<p class="p1">});</p>
+<p class="p2"><br></p>
+<p class="p1">/* 안전한 HTML 이스케이프 */</p>
+<p class="p1">function escapeHtml(s){ return String(s).replace(/[&amp;&lt;&gt;"']/g, c=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return {'&amp;':'&amp;amp;','&lt;':'&amp;lt;','&gt;':'&amp;gt;','"':'&amp;quot;',"'":'&amp;#39;'}[c];</p>
+<p class="p1">}); }</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
