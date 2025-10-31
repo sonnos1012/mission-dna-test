@@ -1,32 +1,42 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>선교 유형 성향 테스트</title>
   <style>
-    body { font-family:-apple-system,BlinkMacSystemFont,sans-serif; background:#f6f8fa; margin:0; padding:0;}
-    .container { max-width:720px; margin:40px auto; background:#fff; padding:40px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1);}
-    h1 { text-align:center; margin-bottom:10px; font-size:28px;}
-    .subtitle { text-align:center; font-size:15px; color:#555; margin-bottom:35px;}
-    .question { margin-bottom:28px;}
-    .question strong { display:block; margin-bottom:12px; font-size:18px; color:#333;}
-    .options label { display:block; margin:6px 0; cursor:pointer; font-size:16px;}
-    .options input { margin-right:8px;}
-    #submitBtn { display:block; margin:30px auto 10px; padding:14px 30px; font-size:18px; border:none; border-radius:6px; background:#2563eb; color:#fff; cursor:pointer;}
-    #submitBtn:hover { background:#1e4fd2;}
-    #resultPage { display:none; text-align:center;}
-    #resultPage h2 { margin-bottom:20px; font-size:26px;}
-    #resultPage p { line-height:1.7; font-size:18px; white-space:pre-line;}
-    hr { margin:25px 0; border:none; border-top:1px solid #ddd;}
+    :root{
+      --bg:#f6f8fa; --card:#ffffff; --text:#1f2937; --muted:#6b7280;
+      --primary:#2563eb; --primary-dark:#1e4fd2; --accent:#10b981; --rule:#e5e7eb;
+    }
+    *{box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);margin:0;color:var(--text)}
+    .container{max-width:760px;margin:40px auto;background:var(--card);padding:40px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+    h1{margin:0 0 10px;text-align:center;font-size:30px}
+    .subtitle{margin:0 auto 32px;text-align:center;font-size:15px;color:var(--muted);line-height:1.6}
+    .question{margin:0 0 26px}
+    .question strong{display:block;margin:0 0 10px;font-size:18px}
+    .options label{display:block;margin:8px 0;cursor:pointer;font-size:16px;line-height:1.4}
+    .options input{margin-right:8px}
+    #submitBtn{display:block;margin:30px auto 10px;padding:14px 28px;font-size:18px;border:none;border-radius:8px;background:var(--primary);color:#fff;cursor:pointer}
+    #submitBtn:hover{background:var(--primary-dark)}
+    #resultPage{display:none;text-align:center}
+    #resultPage h2{margin:0 0 14px;font-size:26px}
+    #resultPage p{margin:12px 0;line-height:1.75;font-size:18px;white-space:pre-line}
+    hr{margin:24px 0;border:none;border-top:1px solid var(--rule)}
+    .again{margin-top:18px;padding:10px 18px;border:none;border-radius:8px;background:var(--accent);color:#fff;font-size:16px;cursor:pointer}
   </style>
 </head>
 <body>
   <div class="container" id="quizPage">
-    <h1>선교 유형 성향 테스트</h1>
-    <div class="subtitle">사역을 한다면 나는 어떤 성향일까?<br>총 8문제 | 예상 소요시간 : 약 2분</div>
-    <form id="quizForm">
+    <h1>💥 당신은 어떤 선교 DNA인가?</h1>
+    <div class="subtitle">
+      당신이 선교팀이라면? 선교 유형 검사지<br/>
+      총 8문제 | 예상 소요시간 : 2분
+    </div>
 
+    <form id="quizForm">
+      <!-- Q1 -->
       <div class="question">
         <strong>Q1. 새로운 일을 맡게 된다면, 나는…</strong>
         <div class="options">
@@ -37,6 +47,7 @@
         </div>
       </div>
 
+      <!-- Q2 -->
       <div class="question">
         <strong>Q2. 함께하는 팀원이 지쳐 있을 때, 나는…</strong>
         <div class="options">
@@ -47,6 +58,7 @@
         </div>
       </div>
 
+      <!-- Q3 -->
       <div class="question">
         <strong>Q3. 사역을 한다면 가장 기대되는 부분은?</strong>
         <div class="options">
@@ -57,6 +69,7 @@
         </div>
       </div>
 
+      <!-- Q4 -->
       <div class="question">
         <strong>Q4. 사역 중이라면, 언제 가장 보람을 느낄 것 같나요?</strong>
         <div class="options">
@@ -67,6 +80,7 @@
         </div>
       </div>
 
+      <!-- Q5 -->
       <div class="question">
         <strong>Q5. 하나님이 나를 사역의 자리로 부르신다면, 나는…</strong>
         <div class="options">
@@ -77,6 +91,7 @@
         </div>
       </div>
 
+      <!-- Q6 -->
       <div class="question">
         <strong>Q6. 예기치 못한 어려움이 생기면, 나는…</strong>
         <div class="options">
@@ -87,6 +102,7 @@
         </div>
       </div>
 
+      <!-- Q7 -->
       <div class="question">
         <strong>Q7. 팀 안에서 맡게 된다면, 나는…</strong>
         <div class="options">
@@ -97,6 +113,7 @@
         </div>
       </div>
 
+      <!-- Q8 -->
       <div class="question">
         <strong>Q8. 사역을 한다면 나의 마음가짐은?</strong>
         <div class="options">
@@ -114,10 +131,11 @@
   <div class="container" id="resultPage">
     <h1>당신의 선교 성향 결과</h1>
     <div id="result"></div>
-    <button onclick="location.reload()" style="margin-top:20px;padding:10px 20px;font-size:16px;border:none;border-radius:5px;background:#10b981;color:white;cursor:pointer;">다시 하기</button>
+    <button class="again" onclick="location.reload()">다시 하기</button>
   </div>
 
   <script>
+    // 완전균형 매핑 (인접 문항 동일 위치 반복 없음)
     const QUESTION_MAP = {
       q1:{A:'해외',B:'국내',C:'군',D:'통일'},
       q2:{A:'군',B:'통일',C:'해외',D:'국내'},
@@ -129,37 +147,61 @@
       q8:{A:'국내',B:'통일',C:'해외',D:'군'}
     };
 
+    // 결과 설명(보강 버전, 이모지 없음)
     const TYPE_DESC = {
-      '국내':`🏠 국내선교형\n\n가까운 곳에서 복음을 전하고 사랑을 나누는 실천가형입니다.\n당신은 '삶의 자리' 자체가 선교지라고 믿는 사람입니다. 거리전도, 캠퍼스, 지역봉사처럼 국내 각지에서 복음을 살아내며, 사람들과 함께 웃고 울 수 있는 따뜻한 현장형 사역자입니다.\n\n작은 섬김이 모여 큰 변화를 만든다는 것을 믿는 당신의 걸음은 이미 누군가에게 복음의 통로입니다.`,
-      
-      '해외':`🌏 해외선교형\n\n새로운 문화와 언어 속에서도 복음을 전하는 모험가형입니다.\n낯선 환경에서도 열린 마음으로 배우며, 주어진 곳에서 빠르게 적응해 도전하는 성향입니다.\n\n당신은 세상 곳곳에서 복음의 씨앗을 심고, 다른 문화 속에서도 사랑으로 다가가는 사람입니다. 주님이 부르신다면, 그 어디든 순종하며 나아갈 준비가 되어 있습니다.`,
-      
-      '군':`🪖 군선교형\n\n묵묵히 중보하며 다른 이들을 지지하는 후방 헌신자형입니다.\n당신은 직접 앞에 서기보다는 뒤에서 군인들과 청년들을 위해 기도하고 편지하며, 보이지 않는 자리에서 든든히 지탱하는 사람입니다.\n\n'하나님이 기억하시는 헌신은 조용하지만 결코 작지 않다'는 것을 아는 당신은 공동체의 숨은 버팀목이자, 신앙의 든든한 동반자입니다.`,
-      
-      '통일':`🤝 통일선교형\n\n복음적 평화통일과 민족의 화해를 꿈꾸는 비전형입니다.\n남과 북, 세대와 세대 사이에 다리를 놓으며, 복음 안에서 하나 되는 미래를 그립니다.\n\n당신은 분단의 아픔 속에서도 희망을 잃지 않고, 하나님의 시선으로 민족을 바라봅니다. 눈에 보이지 않아도 기도로 민족의 회복을 준비하는 중보자형 사역자입니다.`
+      '국내':`국내선교형
+
+가까운 자리에서 직접 움직이며 섬김을 실천하는 유형입니다.
+거리/캠퍼스/지역 섬김 같은 국내 현장에서 사람들과 함께하며,
+작은 행동 하나도 누군가의 삶을 바꾸는 씨앗이 된다고 믿습니다.
+'지금 여기'를 선교지로 보는 현실적·따뜻한 실천가입니다.`,
+
+      '해외':`해외선교형
+
+새로운 환경에서 배우고 적응하며 길을 여는 유형입니다.
+언어와 문화의 차이를 두려워하기보다 기회로 여기고,
+겸손하게 배우면서도 담대하게 도전합니다.
+부르심이 있는 곳이면 어디든 순종해 복음의 다리를 놓습니다.`,
+
+      '군':`군선교형
+
+보이는 앞자리보다 보이지 않는 후방에서 중보와 격려로 서는 유형입니다.
+군 장병과 청년들을 위해 기도하고, 편지와 관심으로 신앙을 지켜 줍니다.
+조용하지만 꾸준한 헌신으로 공동체의 버팀목이 되는 동반자입니다.`,
+
+      '통일':`통일선교형
+
+복음적 평화와 화해를 바라보며 갈라진 마음을 잇는 유형입니다.
+남과 북, 세대와 세대 사이에 다리를 놓고,
+기도와 섬김으로 '함께 예배하는 날'을 준비합니다.
+넓은 시야와 끈기로 공동체를 하나로 모아 갑니다.`
     };
 
-    document.getElementById('submitBtn').addEventListener('click',()=>{
-      const form=document.getElementById('quizForm');
-      let counts={'국내':0,'해외':0,'군':0,'통일':0};
+    document.getElementById('submitBtn').addEventListener('click', () => {
+      const form = document.getElementById('quizForm');
+      const counts = {국내:0, 해외:0, 군:0, 통일:0};
 
       for(let i=1;i<=8;i++){
-        const ans=form['q'+i].value;
-        if(!ans){alert('모든 문항에 답해주세요!');return;}
-        counts[QUESTION_MAP['q'+i][ans]]++;
+        const field = form['q'+i];
+        const ans = field && field.value;
+        if(!ans){ alert('모든 문항에 답해주세요!'); return; }
+        const type = QUESTION_MAP['q'+i][ans];
+        counts[type]++;
       }
 
-      const total=Object.values(counts).reduce((a,b)=>a+b,0);
-      let perc={}; for(const t in counts){perc[t]=((counts[t]/total)*100).toFixed(1);}
-      const top=Object.keys(counts).reduce((a,b)=>counts[a]>counts[b]?a:b);
-      const others=Object.keys(counts).filter(x=>x!==top).sort((a,b)=>perc[b]-perc[a]);
+      const total = Object.values(counts).reduce((a,b)=>a+b,0);
+      const perc = Object.fromEntries(Object.entries(counts).map(([k,v])=>[k, ((v/total)*100).toFixed(1)]));
 
-      document.getElementById('result').innerHTML=`
+      const top = Object.keys(counts).reduce((a,b)=> counts[a] >= counts[b] ? a : b);
+      const others = Object.keys(counts).filter(t=>t!==top).sort((a,b)=>perc[b]-perc[a]);
+
+      document.getElementById('result').innerHTML = `
         <h2>${top} 선교형 (${perc[top]}%)</h2>
         <p>${TYPE_DESC[top]}</p>
-        <hr>
-        <p style="font-size:16px;color:#555;">기타 유형:<br>${others.map(x=>`${x}형 (${perc[x]}%)`).join('<br>')}</p>
+        <hr/>
+        <p style="font-size:16px;color:#6b7280">기타 유형<br>${others.map(t=>`${t}형 (${perc[t]}%)`).join('<br>')}</p>
       `;
+
       document.getElementById('quizPage').style.display='none';
       document.getElementById('resultPage').style.display='block';
     });
