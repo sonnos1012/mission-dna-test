@@ -124,13 +124,12 @@
         </div>
       </div>
 
-      <!-- 클릭 보장: inline + JS 둘 다 -->
-      <button type="button" id="submitBtn" onclick="submitQuiz()">결과 보기</button>
+      <button type="button" id="submitBtn">결과 보기</button>
     </form>
   </div>
 
   <div class="container" id="resultPage">
-    <h1>당신의 선교 성향 결과</h1>
+    <h1>🌿 당신의 선교 성향 결과 🌿</h1>
     <div id="result"></div>
     <button class="again" onclick="location.reload()">다시 하기</button>
   </div>
@@ -173,38 +172,34 @@
 넓은 시야와 끈기로 공동체를 하나로 화합하게 하는 평화의 일꾼입니다.`
     };
 
-    // 클릭 함수 (inline과 이벤트 리스너 둘 다 연결)
-    function submitQuiz(){
+    document.getElementById('submitBtn').addEventListener('click', function(){
       const form=document.getElementById('quizForm');
       const counts={'국내':0,'해외':0,'군':0,'통일':0};
 
       for(let i=1;i<=8;i++){
-        const group=form['q'+i];
-        const ans=group && group.value;
+        const ans=form['q'+i].value;
         if(!ans){ alert('모든 문항에 답변해주세요!'); return; }
         counts[QUESTION_MAP['q'+i][ans]]++;
       }
 
       const total=Object.values(counts).reduce((a,b)=>a+b,0);
       const perc={};
-      for(const t in counts){ perc[t]=((counts[t]/total)*100).toFixed(1); }
-      const top=Object.keys(counts).reduce((a,b)=>counts[a]>=counts[b]?a:b);
+      for(const t in counts){perc[t]=((counts[t]/total)*100).toFixed(1);}
+      const top=Object.keys(counts).reduce((a,b)=>counts[a]>counts[b]?a:b);
       const others=Object.keys(counts).filter(x=>x!==top).sort((a,b)=>perc[b]-perc[a]);
 
       document.getElementById('result').innerHTML=`
-        <h2>${top} 선교형 (${perc[top]}%)</h2>
+        <h2>➡️ ${top} 선교형 (${perc[top]}%)</h2>
         <p>${TYPE_DESC[top]}</p>
         <hr/>
-        <p style="font-size:16px;color:#6b7280">기타 유형<br>${others.map(x=>`${x}형 (${perc[x]}%)`).join('<br>')}</p>
+        <p style="font-size:16px;color:#6b7280">
+          기타 유형<br>
+          ${others.map(x=>`${x}선교형 (${perc[x]}%)`).join('<br>')}
+        </p>
       `;
+
       document.getElementById('quizPage').style.display='none';
       document.getElementById('resultPage').style.display='block';
-    }
-
-    // DOM 로드 후에도 한 번 더 연결(이중 안전장치)
-    document.addEventListener('DOMContentLoaded', ()=>{
-      const btn=document.getElementById('submitBtn');
-      if(btn) btn.addEventListener('click', submitQuiz);
     });
   </script>
 </body>
