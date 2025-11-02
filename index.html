@@ -124,7 +124,8 @@
         </div>
       </div>
 
-      <button type="button" id="submitBtn">결과 보기</button>
+      <!-- 클릭 보장: inline + JS 둘 다 -->
+      <button type="button" id="submitBtn" onclick="submitQuiz()">결과 보기</button>
     </form>
   </div>
 
@@ -172,24 +173,22 @@
 넓은 시야와 끈기로 공동체를 하나로 화합하게 하는 평화의 일꾼입니다.`
     };
 
-    document.getElementById('submitBtn').addEventListener('click',()=>{
+    // 클릭 함수 (inline과 이벤트 리스너 둘 다 연결)
+    function submitQuiz(){
       const form=document.getElementById('quizForm');
       const counts={'국내':0,'해외':0,'군':0,'통일':0};
 
-      // 모든 문항 체크
       for(let i=1;i<=8;i++){
-        const ans=form['q'+i].value;
-        if(!ans){
-          alert('모든 문항에 답변해주세요!');
-          return; // 즉시 종료
-        }
+        const group=form['q'+i];
+        const ans=group && group.value;
+        if(!ans){ alert('모든 문항에 답변해주세요!'); return; }
         counts[QUESTION_MAP['q'+i][ans]]++;
       }
 
       const total=Object.values(counts).reduce((a,b)=>a+b,0);
       const perc={};
-      for(const t in counts){perc[t]=((counts[t]/total)*100).toFixed(1);}
-      const top=Object.keys(counts).reduce((a,b)=>counts[a]>counts[b]?a:b);
+      for(const t in counts){ perc[t]=((counts[t]/total)*100).toFixed(1); }
+      const top=Object.keys(counts).reduce((a,b)=>counts[a]>=counts[b]?a:b);
       const others=Object.keys(counts).filter(x=>x!==top).sort((a,b)=>perc[b]-perc[a]);
 
       document.getElementById('result').innerHTML=`
@@ -200,6 +199,12 @@
       `;
       document.getElementById('quizPage').style.display='none';
       document.getElementById('resultPage').style.display='block';
+    }
+
+    // DOM 로드 후에도 한 번 더 연결(이중 안전장치)
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const btn=document.getElementById('submitBtn');
+      if(btn) btn.addEventListener('click', submitQuiz);
     });
   </script>
 </body>
